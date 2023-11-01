@@ -1,0 +1,7 @@
+Setup Project 
+
+- npx create-react-app frontend
+- Git/ Github 
+    - git init in root and move gitignore to root directory
+    - edit .gitignore to  remove / from "node_modules" and add ".env" 
+    - create github repo and add remote repository to project 
