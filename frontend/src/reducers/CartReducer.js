@@ -10,7 +10,7 @@ const cartReducer = (state, action) => {
 
             localStorage.setItem('paymentMethod', JSON.stringify(action.payload))
             return newCart
-
+        
         case 'SET_CART_ITEMS':
 
             return {
@@ -20,42 +20,26 @@ const cartReducer = (state, action) => {
 
         case 'ADD_ITEM_TO_CART': {
             const { product, qty } = action.payload
-            //console.log(action.payload)
-
-
             const cartItem = state.cartItems.find(item => item.product === product)
             if (cartItem) {
-
-
                 const newCart = { ...state, cartItems: state.cartItems.map(item => item.product === product ? { ...item, qty: item.qty + qty } : item) }
-                //console.log(state)
-
                 return newCart
             } else {
-
                 const newCart = {
                     ...state,
                     cartItems: [...state.cartItems,
                     action.payload]
                 }
-
-
-                console.log(newCart)
                 return newCart
 
             }
 
         }
         case 'ADD_ITEM_TO_LOCAL_CART': {
-
             const { product, qty } = action.payload
             const cartItem = state.cartItems.find(item => item.product === product)
             if (cartItem) {
-
-
                 const newCart = { ...state, cartItems: state.cartItems.map(item => item.product === product ? { ...item, qty: item.qty + qty } : item) }
-                //console.log(state)
-
                 localStorage.setItem('cart', JSON.stringify(newCart))
                 return newCart
             } else {
@@ -67,7 +51,6 @@ const cartReducer = (state, action) => {
                 }
                 //stringify to store as string and parse to take out as json 
                 localStorage.setItem('cart', JSON.stringify(newCart))
-                console.log(newCart)
                 return newCart
 
             }
@@ -78,7 +61,6 @@ const cartReducer = (state, action) => {
             console.log(`Product is ${product} and qty is ${qty}`)
 
             const newCart = { ...state, cartItems: state.cartItems.map(item => item.product === product ? { ...item, qty: qty } : item) }
-            console.log(newCart)
 
             localStorage.setItem('cart', JSON.stringify(newCart))
             return newCart
@@ -89,9 +71,6 @@ const cartReducer = (state, action) => {
             console.log(`Product is ${product} and qty is ${qty}`)
 
             const newCart = { ...state, cartItems: state.cartItems.map(item => item.product === product ? { ...item, qty: qty } : item) }
-            console.log(newCart)
-
-
             return newCart
         }
         case 'DELETE_LOCAL_CART_ITEM': {

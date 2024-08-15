@@ -22,12 +22,9 @@ export const getCartItems = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 
-
 }
 export const replaceCart = async (req, res) => {
     const { _id } = req.user
-
-    //console.log(req.body)
     try {
         const cartItems = await User.replaceCart(_id, req.body)
         res.status(200).json(cartItems);
@@ -156,12 +153,8 @@ export const updateUserProfile = async (req, res) => {
 
     //Add doc to db
     try {
-
         //user has all model fields     
         const user = await User.updateUserProfile(_id, name, email, password);
-        console.log(user)
-
-
         //const updatedUser = await user.save()
 
         /*const token = await createToken(_id)*/
@@ -172,9 +165,6 @@ export const updateUserProfile = async (req, res) => {
             name: user.name,
             _id: user._id,
             shippingAddress: user.shippingAddress
-
-
-            //Does user keep same token?
         }
 
         //Send back a OK response with new user and token 
@@ -313,14 +303,10 @@ export const signupUser = async (req, res) => {
 
 }
 
-
-
 export const loginUser = async (req, res) => {
     //res.json({mssg: "signup user"});
     //access body with req.body
     const { email, password } = req.body;
-    console.log(email)
-    console.log(password)
 
     let emptyFields = [];
 
@@ -333,11 +319,8 @@ export const loginUser = async (req, res) => {
     if (emptyFields.length > 0) {
         return res.status(400).json({ error: 'Please fill in all fields', emptyFields });
     }
-
-
     //Add doc to db
     try {
-
         //user has all model fields     
         const user = await User.login(email, password);
         const userInfo = {
@@ -358,7 +341,6 @@ export const loginUser = async (req, res) => {
         //Send back a OK response and the email and new document 
         res.status(200).json({ ...userInfo, token });
     } catch (error) {
-        console.log(error);
         //Send error status and send json with the error msg
         res.status(400).json({ error: error.message });
     }

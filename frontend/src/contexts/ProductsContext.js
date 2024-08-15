@@ -26,9 +26,6 @@ export const ProductsContextProvider = ({ children }) => {
         )
         const data = await response.json()
         if (response.ok) {
-
-
-
             dispatch({
                 type: "PRODUCT_LIST_SUCCESS",
                 payload: data,

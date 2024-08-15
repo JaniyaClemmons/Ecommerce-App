@@ -9,13 +9,9 @@ const LoginScreen = () => {
     const navigate = useNavigate()
     const { search } = useLocation()
     const redirectInUrl = new URLSearchParams(search).get('redirect')
-
-    //const redirectInUrl = useParams('redirect')
     const redirect = redirectInUrl ? redirectInUrl : '/'
 
-
-    const { login, error, loading, success } = useLogin()
-    //console.log(loading)
+    const { login, error, loading } = useLogin()
     const [user, setUser] = useState({
 
         email: "",
@@ -26,34 +22,23 @@ const LoginScreen = () => {
     useEffect(() => {
         const loggedIn = JSON.parse(localStorage.getItem('user'))
         if (loggedIn) {
-
             navigate(redirect);
         }
     }, [navigate, redirect])
 
-    /*const redirect = location.search ? location.search.split('=')[1] : '/'*/
-
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         if (await login(user.email, user.password)) {
             navigate(redirect);
         }
-
-
-
-
     }
 
     function handleChange(event) {
-
         const { name, value } = event.target;
         setUser(prevValue => {
             return ({ ...prevValue, [name]: value })
         })
     }
-
-
 
     return (
         <Container className="small-container">
@@ -61,8 +46,6 @@ const LoginScreen = () => {
             {error && <MessageBox variant="danger">{error}</MessageBox>}
             {loading && <LoadingBox></LoadingBox>}
             <Form onSubmit={handleSubmit}>
-
-
                 <Form.Group className="mb-3" controlId="email">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
@@ -84,7 +67,6 @@ const LoginScreen = () => {
                         value={user.password}
                         required
                     />
-
                 </Form.Group>
                 <div className="mb-3">
                     <Button type="submit" disabled={loading}>Sign In</Button>
@@ -99,10 +81,7 @@ const LoginScreen = () => {
                 </div>
             </Form>
         </Container>
-
-
     )
 }
-
 
 export default LoginScreen;

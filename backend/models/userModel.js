@@ -134,8 +134,8 @@ userSchema.statics.updateUserProfile = async function (_id, name, email, passwor
 userSchema.statics.addItemToCart = async function (_id, product, qty) {
     //const cart = this.getCartItems(_id)
 
-    /*console.log(product)
-    console.log(qty)*/
+    console.log(product)
+    console.log(qty)
     const user = await this.findById({ _id })
 
     const oldCart = user.cartItems
@@ -172,7 +172,7 @@ userSchema.statics.addItemToCart = async function (_id, product, qty) {
             qty: item.qty
         }
     })
-    console.log(cartItems)
+    console.log("backend: ", cartItems)
     return cartItems
 
 }
@@ -194,6 +194,7 @@ userSchema.statics.getCartItems = async function (_id) {
             qty: item.qty
         }
     })
+    
     return cartItems
 
 }

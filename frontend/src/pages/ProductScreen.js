@@ -29,7 +29,6 @@ const ProductScreen = () => {
 
 
     useEffect(() => {
-        console.log("here")
         listProductDetails(id)
         if (successProductReview) {
             setRating(0)

@@ -1,5 +1,6 @@
 
 import React, { useEffect } from "react"
+import { useParams, useLocation } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom"
 import { Row, Col, Image, ListGroup, Card, Button, Form } from "react-bootstrap"
 import useCartContext from "../hooks/useCartContext.js"
@@ -13,23 +14,22 @@ const CartScreen = () => {
 
     const { cartItems, updateCartQty, removeFromCart, dispatch } = useCartContext()
 
-    /* For URL query/params 
+    //For URL query/params 
     const { id } = useParams()
     const location = useLocation()
     //returns a string or null so wrap in Number 
-    const qty = Number(new URLSearchParams(location.search).get('qty')) */
+    const qty = Number(new URLSearchParams(location.search).get('qty')) 
 
-    /*useEffect(() => {
-        const items = JSON.parse(localStorage.getItem('cartItems')).cartItems;
+    useEffect(() => {
+        const items = JSON.parse(localStorage.getItem('cartItems'))?.cartItems;
         if (items) {
             dispatch({ type: 'SET_CART_ITEMS', payload: items });
         }
-    }, [dispatch])*/
+    }, [dispatch])
 
 
     const removeHandler = (id) => {
         removeFromCart(id)
-
     }
     const checkoutHandler = (event) => {
         event.preventDefault()

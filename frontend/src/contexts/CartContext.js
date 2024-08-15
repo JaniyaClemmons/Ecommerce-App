@@ -18,21 +18,16 @@ export const CartContextProvider = ({ children }) => {
     //we get back a state value and function to update it like useState
     //we pass in a custom reducer function and initial state value
     const [state, dispatch] = useReducer(cartReducer, cart)
-
     const { user } = useAuthContext()
     //let user = localStorage.getItem('user')
 
 
 
     useEffect(() => {
-
         //user = localStorage.getItem('user')
         //Global User Context 
         if (user) {
-
             try {
-
-
                 const getCartItems = async () => {
                     //Get Users Cart
                     const response = await fetch(`/api/users/cart`, {
@@ -40,20 +35,15 @@ export const CartContextProvider = ({ children }) => {
                             'Authorization': `Bearer ${user.token}`
                         }
                     })
-
                     const cart = await response.json();
-
-                    //combine the 2 carts if cart on local storage 
-
+                    if(response.ok){
+                        //combine the 2 carts if cart on local storage 
                     if (localStorage.getItem('cart')) {
                         const items = JSON.parse(localStorage.getItem('cart')).cartItems;
-
-
                         const mergedCart = [...cart, ...items].filter((obj, idx) => [...cart, ...items].findIndex((item) =>
                             item.product === obj.product
                         ) === idx
                         )
-
                         localStorage.removeItem('cart')
 
                         const payload = mergedCart.map((item) => ({
@@ -83,6 +73,11 @@ export const CartContextProvider = ({ children }) => {
                         dispatch({ type: 'SET_CART_ITEMS', payload: cart })
                     }
 
+                    }else{
+                        console.log("Unable to get Cart Items from user")
+                    }
+                    
+
                 }
                 //Get address from db
                 const setAddress = async () => {
@@ -110,10 +105,9 @@ export const CartContextProvider = ({ children }) => {
             } catch (err) {
                 console.log(err);
             }
-        } //No User Logged In 
+        } 
+        //No User Logged In 
         else {
-
-
             //If local cart
             if (localStorage.getItem('cart')) {
                 const items = JSON.parse(localStorage.getItem('cart')).cartItems;
@@ -135,7 +129,6 @@ export const CartContextProvider = ({ children }) => {
 
     const addToCart = async (id, qty) => {
         //const user = JSON.parse(localStorage.getItem('user'))
-
         if (!user) {
             try {
                 dispatch({ type: 'SENDING_REQUEST' });
@@ -150,12 +143,8 @@ export const CartContextProvider = ({ children }) => {
                         countInStock: data.countInStock,
                         qty: qty
                     }
-
-
                     dispatch({ type: 'REQUEST_FINISHED' });
                     dispatch({ type: 'ADD_ITEM_TO_LOCAL_CART', payload: { ...payload } })
-
-
                 }
 
             } catch (err) {
@@ -191,8 +180,6 @@ export const CartContextProvider = ({ children }) => {
 
                 const updatedCart = await response.json()
 
-
-
                 dispatch({ type: 'SET_CART_ITEMS', payload: updatedCart });
 
             } catch (err) {
@@ -201,12 +188,9 @@ export const CartContextProvider = ({ children }) => {
         }
     }
     const updateCartQty = async (id, qty) => {
-
         //const user = JSON.parse(localStorage.getItem('user'))
-
         if (!user) {
             try {
-                dispatch({ type: 'SENDING_REQUEST' });
                 const res = await fetch(`/api/products/${id}`);
                 const data = await res.json();
 
@@ -218,9 +202,6 @@ export const CartContextProvider = ({ children }) => {
                     countInStock: data.countInStock,
                     qty: qty
                 }
-
-
-                dispatch({ type: 'REQUEST_FINISHED' });
 
                 dispatch({ type: 'UPDATE_LOCAL_CART_ITEM', payload: { ...payload } })
 
@@ -230,7 +211,6 @@ export const CartContextProvider = ({ children }) => {
         }
         else {
             try {
-                dispatch({ type: 'SENDING_REQUEST' });
                 const res = await fetch(`/api/products/${id}`);
                 const data = await res.json();
 
@@ -242,9 +222,6 @@ export const CartContextProvider = ({ children }) => {
                     countInStock: data.countInStock,
                     qty: qty
                 }
-
-
-                dispatch({ type: 'REQUEST_FINISHED' });
 
                 const response = await fetch('/api/users/cart/qty', {
                     method: "PUT",
