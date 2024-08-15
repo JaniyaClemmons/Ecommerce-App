@@ -34,12 +34,14 @@ const LoginScreen = () => {
     /*const redirect = location.search ? location.search.split('=')[1] : '/'*/
 
     const handleSubmit = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
+        const x = await login(user.email, user.password);
+        console.log("value shouldnt be undefined:", x);
 
-        //console.log(error);
+        if (x) {
+            console.log("Redirect: ", redirect); 
+            navigate(redirect);
 
-        if (await login(user.email, user.password)) {
-            navigate(redirect)
         }
 
 

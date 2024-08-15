@@ -33,13 +33,13 @@ const useLogin = () => {
 
             //update auth context with email we get back (dispatch login)
             dispatch({ type: 'LOGIN_SUCCESS', payload: json })
-            //return true
+            return true;
 
 
         }
         else {
-            /*setIsLoading(false)
-            setError(json.error)*/
+            //setIsLoading(false)
+            //setError(json.error)
             //console.log(json.error)
             dispatch({ type: 'LOGIN_FAIL', payload: json.error })
 

@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useEffect } from "react";
 
 import AuthReducer from "../reducers/userReducer.js"
 
@@ -21,19 +21,19 @@ export const AuthContextProvider = ({ children }) => {
 
     //We use this to check if user in local storage on page laod 
     //arg 2 empty array to fire function once on app load
-    /* useEffect(() => {
+     useEffect(() => {
  
          const user = JSON.parse(localStorage.getItem('user'))
          //check for token in local starage - from string to obj 
  
  
          if (user) {
-             dispatch({ type: 'LOGIN', payload: user })
+             dispatch({ type: 'LOGIN_REQUEST', payload: user })
  
          }
  
  
-     }, []);*/
+     }, []);
 
     console.log('AuthContext state: ', state)
 
