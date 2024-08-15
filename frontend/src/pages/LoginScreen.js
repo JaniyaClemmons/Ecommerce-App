@@ -35,13 +35,9 @@ const LoginScreen = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const x = await login(user.email, user.password);
-        console.log("value shouldnt be undefined:", x);
 
-        if (x) {
-            console.log("Redirect: ", redirect); 
+        if (await login(user.email, user.password)) {
             navigate(redirect);
-
         }
 
 
