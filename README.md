@@ -1,6 +1,9 @@
 # E-Commerce MERN Application
 
 ## Overview
+![ecommerce-login-order-ezgif com-optimize](https://github.com/user-attachments/assets/afd4647a-91ba-405e-92cc-f80200dab4fb)
+![ecommerce-admin-ezgif com-optimize](https://github.com/user-attachments/assets/7c77a2d1-b762-4118-a8b1-8f1161c76846)
+
 
 This is a full-stack e-commerce application built with the MERN stack. It includes features for user authentication, product listings, a shopping cart, and order management. This project demonstrates the integration of MongoDB, Express.js, React.js, and Node.js in a real-world application.
 
