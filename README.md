@@ -32,8 +32,8 @@ This is a full-stack e-commerce application built with the MERN stack. It includ
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/JaniyaClemmons/Ecommerce-App.git
+cd Ecommerce-App
 ```
 
 ### Backend Setup
@@ -56,6 +56,7 @@ cd your-repo-name
     MONGODB_URI=your_mongodb_connection_string
     JWT_SECRET=your_jwt_secret
     ```
+    Note: You'll need your own MongoDB URI. You can set up a free MongoDB Atlas account or use a local MongoDB server. For security reasons, you should also generate a unique JWT_SECRET.
 
 4. Start the server:
 
